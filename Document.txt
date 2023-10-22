@@ -1,0 +1,12 @@
+1. To create a nest.js project with specific version you have to use the specific verison cli:
+-> npx @nestjs/cli@8.0.0 new my-nest-project
+
+2. Using cli
+ a. to generate modules
+  i. if nestcli is globally installed then simply use:
+   - nest generate module modules/quiz  or - nest g mo module/quiz
+  ii. if you want to use npx then(use this when nestjs/cli is not globally installed and only internally installed using point number 1 method):
+   - npx @nestjs/cli generate module modules/quiz
+
+ b. to generate controller
+  i. or nest g co quiz or npx @nestjs/cli generate controller quiz
