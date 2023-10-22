@@ -6,10 +6,10 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateQuestionDto } from './dto/create-question.dto';
-import { QuestionService } from './question.service';
-import { Question } from './question.entity';
-import { QuizService } from './quiz.service';
+import { CreateQuestionDto } from '../dto/create-question.dto';
+import { QuestionService } from '../services/question.service';
+import { Question } from '../entitites/question.entity';
+import { QuizService } from '../services/quiz.service';
 
 // @ApiTags('Questions')
 // @ApiBearerAuth()
