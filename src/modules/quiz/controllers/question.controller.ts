@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { CreateQuestionDto } from '../dto/create-question.dto';
 import { QuestionService } from '../services/question.service';
-import { Question } from '../entitites/question.entity';
+import { Question } from '../entities/question.entity';
 import { QuizService } from '../services/quiz.service';
 
 // @ApiTags('Questions')

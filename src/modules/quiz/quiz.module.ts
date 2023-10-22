@@ -6,10 +6,19 @@ import { QuizRepository } from './repositories/quiz.repository';
 import { QuestionController } from './controllers/question.controller';
 import { QuestionService } from './services/question.service';
 import { QuestionRepository } from './repositories/question.repository';
+import { OptionRepository } from './repositories/option.repository';
+import { OptionController } from './controllers/option.controller';
+import { OptionService } from './services/option.service';
 
 @Module({
-  controllers: [QuizController, QuestionController], // quiz module has to know that there is quiz controller
-  imports: [TypeOrmModule.forFeature([QuizRepository, QuestionRepository])],
-  providers: [QuizService, QuestionService], // we have to define service as well for controller to access it
+  controllers: [QuizController, QuestionController, OptionController], // quiz module has to know that there is quiz controller
+  imports: [
+    TypeOrmModule.forFeature([
+      QuizRepository,
+      QuestionRepository,
+      OptionRepository,
+    ]),
+  ],
+  providers: [QuizService, QuestionService, OptionService], // we have to define service as well for controller to access it
 })
 export class QuizModule {}

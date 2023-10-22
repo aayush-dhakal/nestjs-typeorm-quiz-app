@@ -10,8 +10,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { QuizService } from '../services/quiz.service';
-import { CreateQuizDto } from '../dto/CreateQuiz.dto';
-import { Quiz } from '../entitites/quiz.entity';
+import { CreateQuizDto } from '../dto/create-quiz.dto';
+import { Quiz } from '../entities/quiz.entity';
 
 @Controller('quiz') // route will start from /quiz
 export class QuizController {

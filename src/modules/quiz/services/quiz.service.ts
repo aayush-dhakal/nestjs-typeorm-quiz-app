@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QuizRepository } from '../repositories/quiz.repository';
-import { CreateQuizDto } from '../dto/CreateQuiz.dto';
-import { Quiz } from '../entitites/quiz.entity';
+import { CreateQuizDto } from '../dto/create-quiz.dto';
+import { Quiz } from '../entities/quiz.entity';
 
-@Injectable() // when a class is defined as Injectable then we can use its methods in another class by injecting it
+@Injectable() // when a class is defined as Injectable then we can use its methods in another class by injecting it. Services are injectable
 export class QuizService {
   constructor(
     @InjectRepository(QuizRepository) private quizRepository: QuizRepository,
