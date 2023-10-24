@@ -27,11 +27,10 @@ export class OptionController {
   //   type: Option,
   // })
   async saveOptionToQuestion(@Body() createOption: CreateOptionDto) {
-    // const question = await this.questionService.findQuestionById(
-    //   createOption.questionId,
-    // );
-    // const option = await this.optionService.creatOption(createOption, question);
-    // return { question, createOption, option };
-    return createOption;
+    const question = await this.questionService.findQuestionById(
+      createOption.questionId,
+    );
+    const option = await this.optionService.creatOption(createOption, question);
+    return { question, createOption, option };
   }
 }

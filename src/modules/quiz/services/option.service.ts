@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-// import { CreateOptionDto } from '../dto/create-option.dto';
+import { CreateOptionDto } from '../dto/create-option.dto';
 import { Question } from '../entities/question.entity';
 import { OptionRepository } from '../repositories/option.repository';
 
@@ -11,15 +11,15 @@ export class OptionService {
     private optionRepository: OptionRepository,
   ) {}
 
-  // async creatOption(option: CreateOptionDto, question: Question) {
-  //   const newOption = await this.optionRepository.save({
-  //     text: option.text,
-  //     isCorrect: option.isCorrect,
-  //   });
+  async creatOption(option: CreateOptionDto, question: Question) {
+    const newOption = await this.optionRepository.save({
+      text: option.text,
+      isCorrect: option.isCorrect,
+    });
 
-  //   question.options = [...question.options, newOption];
-  //   await question.save();
+    question.options = [...question.options, newOption];
+    await question.save();
 
-  //   return newOption;
-  // }
+    return newOption;
+  }
 }

@@ -26,6 +26,6 @@ export class Option extends BaseEntity {
   })
   isCorrect: boolean;
 
-  // @ManyToOne(() => Question, (question) => question.options)
-  question: Question;
+  @ManyToOne(() => Question, (question) => question.options) // an option is related to one question. options denoted a field defined in question entity. you can name question as anything as it just denoted a single Question data
+  question: Question; // this question is our filed name which will be referenced by question entity
 }
