@@ -9,4 +9,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: 'quiz',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: true,
+  logging: true, // this will log all the raw sql queries
 };

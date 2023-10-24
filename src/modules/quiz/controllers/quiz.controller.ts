@@ -18,8 +18,9 @@ export class QuizController {
   constructor(private quizService: QuizService) {} // with this we can now use the methods from serive class without worring for its object creation
 
   @Get('/') // route will be /quiz
-  getAllQuiz() {
-    return this.quizService.getAllQuiz();
+  async getAllQuiz(): Promise<Quiz[]> {
+    // async getAllQuiz(): Promise<[Quiz[], number]> { use this type when using getManyAndCount method in service
+    return await this.quizService.getAllQuiz();
   }
 
   @Get('/:id')
