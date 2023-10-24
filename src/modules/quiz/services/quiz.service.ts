@@ -24,7 +24,10 @@ export class QuizService {
 
   async getQuizById(id: number): Promise<Quiz> {
     // return await this.quizRepository.findOne(id); // you can only find the client if you are maintaing the relation by passing quiz in save question api(see createQuestion's newQuestion method in question.service file)
-    return await this.quizRepository.findOne(id, { relations: ['questions'] }); // this will also get the questions realted to the quiz
+    // return await this.quizRepository.findOne(id, { relations: ['questions'] }); // this will also get the questions realted to the quiz
+    return await this.quizRepository.findOne(id, {
+      relations: ['questions', 'questions.options'],
+    }); // this will also get the questions and options realted to the quiz
   }
 
   async createNewQuiz(quiz: CreateQuizDto) {
