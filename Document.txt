@@ -10,3 +10,19 @@
 
  b. to generate controller
   i. or nest g co quiz or npx @nestjs/cli generate controller quiz
+
+
+2. For migration:
+ - make sure to delete all tables first to start fresh then 
+ a. to check all migrations:
+ => yarn typeorm:cli migration:show 
+
+ b. then create base migration file(the generated file will be inside database/migrations). This will have commands to create tables with out defined entitites:
+ => yarn migration:generate BaseMigrations
+ or => npm run migration:generate BaseMigrations
+
+ c. To run the migrations:
+ => yarn migration:run
+
+ d. to revert or run migration down:
+ => yarn migration:revert
