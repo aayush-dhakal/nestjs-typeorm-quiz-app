@@ -9,7 +9,17 @@
    - npx @nestjs/cli generate module modules/quiz
 
  b. to generate controller
-  i. or nest g co quiz or npx @nestjs/cli generate controller quiz
+  i. without test files:
+  => nest g co quiz --no-spec or npx @nestjs/cli generate controller quiz --no-spec
+  ii. with test files:
+  => nest g co quiz or npx @nestjs/cli generate controller quiz
+
+
+ c. to generate service
+  i. without test files:
+   - nest g service modules/auth --no-spec
+  ii. with test files:
+   - nest g service modules/auth
 
 
 2. For migration:
@@ -26,3 +36,10 @@
 
  d. to revert or run migration down:
  => yarn migration:revert
+
+3. for local strategy passport authentication:
+ - you must send username and password in payload with email and passport as value. like:
+  {
+    "username":"r@g.com",
+    "password":"Password@123"
+  }
