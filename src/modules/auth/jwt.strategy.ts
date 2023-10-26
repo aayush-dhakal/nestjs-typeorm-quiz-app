@@ -8,8 +8,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     // validation actualyy happend in this super constructor
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      // secretOrKey: appConfig().appSecret,
-      secretOrKey: 'asdffgggg',
+      secretOrKey: appConfig().appSecret,
     });
   }
 
