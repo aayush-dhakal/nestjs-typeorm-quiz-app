@@ -1,5 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 import { QuizRepository } from '../repositories/quiz.repository';
 import { CreateQuizDto } from '../dto/create-quiz.dto';
 import { Quiz } from '../entities/quiz.entity';
@@ -20,6 +25,13 @@ export class QuizService {
       // .take(1) // this will only take one data from the query. Note that even when take method is used getManyAndCount will still return the total number of datas so this will be useful in pagination
       .getMany();
     // .getManyAndCount(); // sends data and count of all the datas
+  }
+
+  async paginate(options: IPaginationOptions): Promise<Pagination<Quiz>> {
+    const qb = this.quizRepository.createQueryBuilder('q');
+    qb.orderBy('q.id', 'DESC');
+
+    return paginate<Quiz>(qb, options); // this paginate is from the typeorm module
   }
 
   async getQuizById(id: number): Promise<Quiz> {
