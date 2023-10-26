@@ -37,12 +37,18 @@
  d. to revert or run migration down:
  => yarn migration:revert
 
-3. for local strategy passport authentication:
+3. For seeders:
+ i. first run seed configuration:
+ => yarn seed:config or npm run seed:config
+ ii. after creating the seed files generate the seed datas by:
+ => yarn seed:run
+
+4. for local strategy passport authentication:
  - you must send username and password in payload with email and passport as value. like:
   {
     "username":"r@g.com",
     "password":"Password@123"
   }
 
-4. for swagger api documentation:
+5. for swagger api documentation:
  - got to http://localhost:5000/api/ to see the documentation
