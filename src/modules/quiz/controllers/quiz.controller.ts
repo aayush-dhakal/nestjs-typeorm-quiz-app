@@ -12,7 +12,9 @@ import {
 import { QuizService } from '../services/quiz.service';
 import { CreateQuizDto } from '../dto/create-quiz.dto';
 import { Quiz } from '../entities/quiz.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('quiz')
 @Controller('quiz') // route will start from /quiz
 export class QuizController {
   constructor(private quizService: QuizService) {} // with this we can now use the methods from serive class without worring for its object creation

@@ -5,7 +5,7 @@ import { MESSAGES, REGEX } from 'src/app.utils';
 export class UserRegisterRequestDto {
   @ApiProperty({
     description: 'The name of the User',
-    example: 'Jhon Doe',
+    example: 'Jhon Doe', // name file will be auto populated with a placeholder in swagger documentation
   })
   @IsNotEmpty()
   name: string;

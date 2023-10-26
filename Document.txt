@@ -43,3 +43,6 @@
     "username":"r@g.com",
     "password":"Password@123"
   }
+
+4. for swagger api documentation:
+ - got to http://localhost:5000/api/ to see the documentation
