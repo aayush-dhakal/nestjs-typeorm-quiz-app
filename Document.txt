@@ -37,6 +37,12 @@
  d. to revert or run migration down:
  => yarn migration:revert
 
+ e. if you have to make changes to table columns then first make the necessary changes and run:
+ => yarn migration:generate added_user_role_column 
+ this will automatically apply the changes via migration. added_user_role_column is our customn migration file name. This command creates a new migration file inside migrations folder in database folder
+ then run the migration for the changes to take effect
+ => yarn migration:run
+
 3. For seeders:
  i. first run seed configuration:
  => yarn seed:config or npm run seed:config
