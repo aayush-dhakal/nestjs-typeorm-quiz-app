@@ -28,6 +28,7 @@ export class SetupData implements Seeder {
     // await getManager().query('ALTER TABLE options ENABLE TRIGGER ALL');
 
     // for postgres
+    // note: if you are having trouble with the truncate in postgres then manually delete the database or table and create a new fresh database or table and run seed by commenting out all these Truncate queries.(remember we are truncating here first so that the previous data are cleared out and fresh datas are inserted)
     await getManager().query('SET session_replication_role = replica'); // since quiz table has association with other tables as well so we cannot simply delete such tables. We have to first disable the foreign key checking.
     await getManager().query('TRUNCATE quizes');
     await getManager().query('TRUNCATE questions');

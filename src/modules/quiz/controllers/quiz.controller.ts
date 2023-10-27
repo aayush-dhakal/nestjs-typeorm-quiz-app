@@ -3,11 +3,11 @@ import {
   Controller,
   DefaultValuePipe,
   Get,
-  HttpCode,
   Param,
   ParseIntPipe,
   Post,
   Query,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -17,14 +17,21 @@ import {
   ApiSecurity,
   ApiTags,
 } from '@nestjs/swagger';
-import { QuizService } from '../services/quiz.service';
+import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
+import { ApiPaginatedResponse } from '../../../common/decorator/api-pagination.response';
+import { AdminRoleGuard } from '../../auth/admin-role.guard';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+// import { Roles } from '../../auth/roles.decorator';
+// import { RolesGuard } from '../../auth/roles.guard';
+
 import { CreateQuizDto } from '../dto/create-quiz.dto';
 import { Quiz } from '../entities/quiz.entity';
-import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
-import { ApiPaginatedResponse } from 'src/common/decorator/api-pagination.response';
+import { QuizService } from '../services/quiz.service';
 
 @ApiTags('quiz')
 @Controller('quiz') // route will start from /quiz
+@ApiSecurity('bearer')
+@UseGuards(JwtAuthGuard)
 export class QuizController {
   constructor(private quizService: QuizService) {} // with this we can now use the methods from serive class without worring for its object creation
 
@@ -48,13 +55,17 @@ export class QuizController {
   }
 
   @Get('/:id')
+  @ApiOkResponse({ description: 'Get a quiz by id', type: Quiz })
   async getQuizById(@Param('id', ParseIntPipe) id: number): Promise<Quiz> {
     return await this.quizService.getQuizById(id);
   }
 
+  @ApiCreatedResponse({ description: 'The quiz that got created', type: Quiz })
   @Post()
   // @HttpCode(200) // to give custom http code. By default post has 201 http code
   @UsePipes(ValidationPipe) // this is basically like a middleware used to validate request body
+  @UseGuards(AdminRoleGuard) // here I'm injecting AdminRoleGuard so this AdminRoleGuard should be injectable and to make it injectable we use @Inject() decorator in that file
+  // @Roles('admin')
   async createQuiz(@Body() quizData: CreateQuizDto) {
     // the type of quizData is set to CreateQuizDto for validation
     // to access request body use @Body() decorator

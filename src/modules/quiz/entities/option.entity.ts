@@ -10,17 +10,17 @@ import { Question } from './question.entity';
 
 @Entity('options')
 export class Option extends BaseEntity {
-  // @ApiProperty({ description: 'Primary key as Option ID', example: 1 })
+  @ApiProperty({ description: 'Primary key as Option ID', example: 1 })
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @ApiProperty({ description: 'The actual option', example: 'Owl' })
+  @ApiProperty({ description: 'The actual option', example: 'Owl' })
   @Column({
     type: 'varchar',
   })
   text: string;
 
-  // @ApiProperty({ description: 'Whether option is correct', example: true })
+  @ApiProperty({ description: 'Whether option is correct', example: true })
   @Column({
     type: 'boolean',
   })
