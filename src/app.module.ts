@@ -14,6 +14,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ApiTokenCheckMiddleware } from './common/middleware/api-token-check.middleware';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   // imports: [QuizModule, TypeOrmModule.forRoot(typeOrmConfig)], // our main app has to know about all other modules
@@ -21,9 +22,10 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     QuizModule,
     ConfigModule.forRoot({ isGlobal: true }), // we need this to read environment variables in typeorm config
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
+    EventEmitterModule.forRoot(),
+    MulterModule.register({ dest: './uploads' }), // if you are uploading the files to the server itself and want to specify the file upload location then use this configuration else no need for it
     UserModule,
     AuthModule,
-    EventEmitterModule.forRoot(),
   ], // our main app has to know about all other modules
   controllers: [AppController],
   providers: [AppService],

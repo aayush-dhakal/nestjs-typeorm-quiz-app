@@ -21,8 +21,8 @@ import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
 import { ApiPaginatedResponse } from '../../../common/decorator/api-pagination.response';
 import { AdminRoleGuard } from '../../auth/admin-role.guard';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
-// import { Roles } from '../../auth/roles.decorator';
-// import { RolesGuard } from '../../auth/roles.guard';
+import { Roles } from '../../auth/roles.decorator';
+import { RolesGuard } from '../../auth/roles.guard';
 
 import { CreateQuizDto } from '../dto/create-quiz.dto';
 import { Quiz } from '../entities/quiz.entity';
@@ -54,6 +54,9 @@ export class QuizController {
     return await this.quizService.paginate(options);
   }
 
+  @UseGuards(RolesGuard) // using guard which only allows access if the role of user has permission
+  // @Roles('admin')
+  @Roles('admin', 'member') // this is our custom decorator which tells that only admin and member role is allowed to access this endpoint. this meta data is passed to the RoleGuard to give the authorization
   @Get('/:id')
   @ApiOkResponse({ description: 'Get a quiz by id', type: Quiz })
   async getQuizById(@Param('id', ParseIntPipe) id: number): Promise<Quiz> {
@@ -65,7 +68,6 @@ export class QuizController {
   // @HttpCode(200) // to give custom http code. By default post has 201 http code
   @UsePipes(ValidationPipe) // this is basically like a middleware used to validate request body
   @UseGuards(AdminRoleGuard) // here I'm injecting AdminRoleGuard so this AdminRoleGuard should be injectable and to make it injectable we use @Inject() decorator in that file. With this guard the user must have admin role to access this endpoint
-  // @Roles('admin')
   async createQuiz(@Body() quizData: CreateQuizDto) {
     // the type of quizData is set to CreateQuizDto for validation
     // to access request body use @Body() decorator
