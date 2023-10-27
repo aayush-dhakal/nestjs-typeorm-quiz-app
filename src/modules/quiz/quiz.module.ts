@@ -10,9 +10,16 @@ import { OptionRepository } from './repositories/option.repository';
 import { OptionController } from './controllers/option.controller';
 import { OptionService } from './services/option.service';
 import { UserModule } from '../user/user.module';
+import { ResponseController } from './controllers/response.controller';
+import { ResponseService } from './services/response.service';
 
 @Module({
-  controllers: [QuizController, QuestionController, OptionController], // quiz module has to know that there is quiz controller
+  controllers: [
+    QuizController,
+    QuestionController,
+    OptionController,
+    ResponseController,
+  ], // quiz module has to know that there is quiz controller
   imports: [
     TypeOrmModule.forFeature([
       QuizRepository,
@@ -21,6 +28,6 @@ import { UserModule } from '../user/user.module';
     ]),
     UserModule,
   ],
-  providers: [QuizService, QuestionService, OptionService], // we have to define service as well for controller to access it
+  providers: [QuizService, QuestionService, OptionService, ResponseService], // we have to define service as well for controller to access it
 })
 export class QuizModule {}

@@ -5,10 +5,13 @@ import {
   paginate,
   Pagination,
 } from 'nestjs-typeorm-paginate';
+import { OnEvent } from '@nestjs/event-emitter';
 import { QuizRepository } from '../repositories/quiz.repository';
 import { CreateQuizDto } from '../dto/create-quiz.dto';
 import { Quiz } from '../entities/quiz.entity';
 import { Question } from '../entities/question.entity';
+import { ResponseAddEvent } from '../events/response-add.event';
+import { events } from '../../../common/constants/event.constants';
 
 @Injectable() // when a class is defined as Injectable then we can use its methods in another class by injecting it. Services are injectable
 export class QuizService {
@@ -44,5 +47,10 @@ export class QuizService {
 
   async createNewQuiz(quiz: CreateQuizDto) {
     return await this.quizRepository.save(quiz);
+  }
+
+  @OnEvent(events.RESPONSE_SUBMITTED) // event listener
+  checkQuizCompeleted(payload: ResponseAddEvent) {
+    console.log('checkQuizCompeleted', payload);
   }
 }

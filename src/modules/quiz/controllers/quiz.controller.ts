@@ -30,7 +30,7 @@ import { QuizService } from '../services/quiz.service';
 
 @ApiTags('quiz')
 @Controller('quiz') // route will start from /quiz
-@ApiSecurity('bearer')
+@ApiSecurity('bearer') // we need bearer token for this quiz endpoint
 @UseGuards(JwtAuthGuard)
 export class QuizController {
   constructor(private quizService: QuizService) {} // with this we can now use the methods from serive class without worring for its object creation
@@ -64,7 +64,7 @@ export class QuizController {
   @Post()
   // @HttpCode(200) // to give custom http code. By default post has 201 http code
   @UsePipes(ValidationPipe) // this is basically like a middleware used to validate request body
-  @UseGuards(AdminRoleGuard) // here I'm injecting AdminRoleGuard so this AdminRoleGuard should be injectable and to make it injectable we use @Inject() decorator in that file
+  @UseGuards(AdminRoleGuard) // here I'm injecting AdminRoleGuard so this AdminRoleGuard should be injectable and to make it injectable we use @Inject() decorator in that file. With this guard the user must have admin role to access this endpoint
   // @Roles('admin')
   async createQuiz(@Body() quizData: CreateQuizDto) {
     // the type of quizData is set to CreateQuizDto for validation
