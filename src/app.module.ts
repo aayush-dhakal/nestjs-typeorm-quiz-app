@@ -26,13 +26,16 @@ import { ApiTokenCheckMiddleware } from './common/middleware/api-token-check.mid
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ApiTokenCheckMiddleware).forRoutes({
-      // path: '*', // this will apply middleware for all paths
-      path: '/',
-      method: RequestMethod.ALL,
-    }); // tokem middleware is applied to all paths with request method of any get, post,... types
-    // for this project we need to set api-token as header with my-token as value
-  }
-}
+export class AppModule {}
+
+// if you want to use middleware then use this code
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer.apply(ApiTokenCheckMiddleware).forRoutes({
+//       // path: '*', // this will apply middleware for all paths
+//       path: '/',
+//       method: RequestMethod.ALL,
+//     }); // tokem middleware is applied to all paths with request method of any get, post,... types
+//     // for this project we need to set api-token as header with my-token as value
+//   }
+// }

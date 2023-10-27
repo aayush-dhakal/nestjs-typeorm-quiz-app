@@ -43,6 +43,9 @@
  then run the migration for the changes to take effect
  => yarn migration:run
 
+ f. if you want to frequently drop your tables and re run migration and seeds then utilze our scripts defined in package.json file:
+ => yarn db:refresh
+
 3. For seeders:
  i. first run seed configuration:
  => yarn seed:config or npm run seed:config

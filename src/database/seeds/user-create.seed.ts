@@ -5,7 +5,7 @@ import { User } from '../../modules/user/user.entity';
 
 export class UserCreateSeed implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
-    await getManager().query('TRUNCATE users'); // first delete the existing table datas
+    await getManager().query('TRUNCATE users'); // first delete the existing table datas. We are able to truncate the user table here like this coz we donot have any associations in user table
 
     await factory(User)().create({
       // this create a seed with our own custom data
